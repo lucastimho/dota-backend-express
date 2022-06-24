@@ -1,0 +1,7 @@
+<%- include("header.ejs") -%>
+<div class="box">
+    <% data.forEach(function (n) { %> 
+        <h1><%= n.name %></h1>
+        <p><%= n.description %></p>
+    <% }) %>
+<%- include("footer.ejs") -%>
