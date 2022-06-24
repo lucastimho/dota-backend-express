@@ -55,7 +55,11 @@ app.post("/player/:account_id", function(req, res) {
         team: playerData.profile.account_id,
         rank: playerData.leaderboard_rank
     })
-    player.save()
+    player.save(function(err) {
+        if (!err) {
+            res.redirect("/");
+        }
+    })
 })
 
 app.listen(3000, function() {
