@@ -1,10 +1,9 @@
-<%- include("header.ejs") -%>
+<%- include ('header.ejs') -%>
 <div class="box">
     <% data.forEach(function (n) { %> 
         <h1><%= n.personaname %></h1>
         <p><%= n.team_name %></p>
         <img src="<%= n.avatarfull %>" alt="">
-        <a href="/player/<%= n.account_id %>">See info</a>
     <% }) %>
 </div>
-<%- include("footer.ejs") -%>
+<% include ('footer.ejs') -%>

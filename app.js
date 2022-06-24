@@ -32,12 +32,12 @@ app.get("/", function(req, res) {
     res.render("home", {data: players})
 })
 
-app.get("/:account_id", function(req, res) {
+app.get("/player/:account_id", function(req, res) {
     let player = [];
     axios.get(`https://api.opendota.com/api/players/${req.params.account_id}`).then((response) => {
         this.player = response.data;
     })
-    res.render("home", {data: player})
+    res.render("player", {data: player})
 })
 
 app.listen(3000, function() {
