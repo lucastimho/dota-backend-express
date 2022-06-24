@@ -8,6 +8,7 @@ app = express();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true})
 
@@ -22,10 +23,14 @@ const playerSchema = {
 }
 
 
-foundData = [{name: "A", description: "B"}, {name:"C", description: "D"}]
+players = [];
 
 app.get("/", function(req, res) {
-    res.render("home", {data: foundData})
+    axios.get("https://api.opendota.com/api/proPlayers").then((response) => {
+        this.players = response.data;
+        console.log("All players", this.players)
+    })
+    res.render("home", {data: players})
 })
 
 app.listen(3000, function() {
