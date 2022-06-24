@@ -4,6 +4,9 @@
         <h1><%= n.personaname %></h1>
         <p><%= n.team_name %></p>
         <img src="<%= n.avatarfull %>" alt="">
+        <form action="/player" method="post">
+            <button type="submit">Add</button>
+        </form>
     <% }) %>
 </div>
 <% include ('footer.ejs') -%>
