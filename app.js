@@ -15,13 +15,14 @@ mongoose.connect("mongodb://localhost:27017", {useNewUrlParser: true})
 const playerSchema = {
     account_id: Number,
     name: String,
-    person_name: String,
+    persona_name: String,
     mmr: Number,
     avatar_full: String,
     team: String,
     rank: Number
 }
 
+const Player = mongoose.Model("Player", playerSchema);
 
 app.get("/", function(req, res) {
     let players = [];
@@ -38,6 +39,23 @@ app.get("/player/:account_id", function(req, res) {
         this.player = response.data;
     })
     res.render("player", {data: player})
+})
+
+app.post("/player/:account_id", function(req, res) {
+    let playerData = [];
+    axios.get(`https://api.opendota.com/api/players/${req.params.account_id}`).then((response) => {
+        this.playerData = response.data;
+    })
+    const player = new Player ({
+        account_id: req.params.account_id,
+        name: playerData.profile.name,
+        persona_name: playerData.profile.personaname,
+        mmr: playerData.mmr_estimate.estimate,
+        avatar_full: playerData.profile.avatarfull,
+        team: playerData.profile.account_id,
+        rank: playerData.leaderboard_rank
+    })
+    player.save()
 })
 
 app.listen(3000, function() {
