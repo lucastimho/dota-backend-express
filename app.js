@@ -23,14 +23,21 @@ const playerSchema = {
 }
 
 
-players = [];
-
 app.get("/", function(req, res) {
+    let players = [];
     axios.get("https://api.opendota.com/api/proPlayers").then((response) => {
         this.players = response.data;
         console.log("All players", this.players)
     })
     res.render("home", {data: players})
+})
+
+app.get("/:account_id", function(req, res) {
+    let player = [];
+    axios.get(`https://api.opendota.com/api/players/${req.params.account_id}`).then((response) => {
+        this.player = response.data;
+    })
+    res.render("home", {data: player})
 })
 
 app.listen(3000, function() {
