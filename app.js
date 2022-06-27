@@ -28,6 +28,11 @@ const userSchema = {
   account_id: Number
 }
 
+const followingSchema = {
+    user: {userSchema},
+    player: {playerSchema}
+}
+
 const Player = mongoose.Model("Player", playerSchema);
 
 app.get("/", function(req, res) {
