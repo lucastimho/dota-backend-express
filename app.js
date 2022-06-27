@@ -76,7 +76,13 @@ app.post("/player/:account_id", function(req, res) {
     })
 })
 
-
+app.get("/live", (req, res) => {
+    let liveGamesNow = {};
+    axios.get("https://api.opendota.com/api/live").then((response) => {
+       this.liveGamesNow = response.data;
+    })
+    res.render("Games", {content: liveGamesNow})
+})
 
 app.listen(3000, function() {
     console.log("Server started on port 3000");
