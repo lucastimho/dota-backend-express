@@ -81,7 +81,7 @@ app.get("/live", (req, res) => {
     axios.get("https://api.opendota.com/api/live").then((response) => {
        this.liveGamesNow = response.data;
     })
-    res.render("Games", {content: liveGamesNow})
+    res.render("games", {content: liveGamesNow})
 })
 
 app.listen(3000, function() {
