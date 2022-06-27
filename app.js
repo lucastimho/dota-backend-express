@@ -34,6 +34,8 @@ const followingSchema = {
 }
 
 const Player = mongoose.Model("Player", playerSchema);
+const User = mongoose.Model("User", userSchema);
+const Following = mongoose.Model("Following", followingSchema);
 
 app.get("/", function(req, res) {
     let players = [];
