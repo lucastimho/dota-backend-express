@@ -84,6 +84,14 @@ app.get("/live", (req, res) => {
     res.render("games", {content: liveGamesNow})
 })
 
+app.get("/contact", (req, res) => {
+    res.render("contact", {content: contactContent})
+})
+
+app.get("/about", (req, res) => {
+    res.render("about", {content: aboutContent})
+})
+
 app.listen(3000, function() {
     console.log("Server started on port 3000");
 })
