@@ -43,7 +43,8 @@ app.get("/player/:account_id", function(req, res) {
 
 app.post("/player/:account_id", function(req, res) {
     let playerData = [];
-    axios.get(`https://api.opendota.com/api/players/${req.params.account_id}`).then((response) => {
+    const url = `https://api.opendota.com/api/players/${req.params.account_id}`
+    axios.get(url).then((response) => {
         this.playerData = response.data;
     })
     const player = new Player ({
@@ -52,7 +53,7 @@ app.post("/player/:account_id", function(req, res) {
         persona_name: playerData.profile.personaname,
         mmr: playerData.mmr_estimate.estimate,
         avatar_full: playerData.profile.avatarfull,
-        team: playerData.profile.account_id,
+        team: axios.get(url + "/pros").then((response) => {return response.data[0].team_name}),
         rank: playerData.leaderboard_rank
     })
     player.save(function(err) {
